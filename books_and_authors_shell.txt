@@ -1,0 +1,128 @@
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_BooksAndAuthors\books_and_authors_proj>python manage.py makemigrations
+Migrations for 'books_and_authors_app':
+  books_and_authors_app\migrations\0001_initial.py
+    - Create model Book
+    - Create model Author
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_BooksAndAuthors\books_and_authors_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_and_authors_app, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying books_and_authors_app.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_BooksAndAuthors\books_and_authors_proj>python manage.py shell
+Python 3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_and_authors_app.models import Book, Author
+>>> c_sharp = Book.objects.create(title = "C Sharp")
+>>> java = Book.objects.create(title = "Java")
+>>> python = Book.objects.create(title = "Python")
+>>> php = Book.objects.create(title = "PHP")
+>>> ruby = Book.objects.create(title = "Ruby")
+>>> jane_austen = Author.objects.create(first_name = "Jane", last_name = "Austen")
+>>> emily_dickinson = Author.objects.create(first_name = "Emily", last_name = "Dickinson")
+>>> fyodor_dostoevsky = Author.objects.create(first_name = "Fyodor", last_name = "Dostoevsky")
+>>> william_shakespeare = Author.objects.create(first_name = "William", last_name = "Shakespeare")
+>>> lau_tzu = Author.objects.create(first_name = "Lau", last_name = "Tzu")
+>>> ^Z
+
+now exiting InteractiveConsole...
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_BooksAndAuthors\books_and_authors_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "some notes"
+Migrations for 'books_and_authors_app':
+  books_and_authors_app\migrations\0002_author_notes.py
+    - Add field notes to author
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_BooksAndAuthors\books_and_authors_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_and_authors_app, contenttypes, sessions
+Running migrations:
+  Applying books_and_authors_app.0002_author_notes... OK
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_BooksAndAuthors\books_and_authors_proj>python manage.py shell
+Python 3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_and_authors_app.models import Book, Author
+>>> Book.objects.get(title="C Sharp")
+<Book: Book object (1)>
+>>> c_sharp = Book.objects.get(title="C Sharp")
+>>> c_sharp
+<Book: Book object (1)>
+>>> c_sharp.title = "C#"
+>>> c_sharp.title
+'C#'
+>>> fourth_author = Author.objects.get(id=4)
+>>> fourth_author.first_name
+'William'
+>>> fourth_author.first_name = "Bill"
+>>> fourth_author.first_name
+'Bill'
+>>> first_author = Author.objects.get(id=1)
+>>> first_author.books.add(Book.objects.get(id=1))
+>>> first_author.books.add(Book.objects.get(id=2))
+>>> second_author = Author.objects.get(id=2)
+>>> second_author.books.add(Book.objects.get(id=1))
+>>> second_author.books.add(Book.objects.get(id=2))
+>>> second_author.books.add(Book.objects.get(id=3))
+>>> third_author = Author.objects.get(id=3)
+>>> third_author.books.add(Book.objects.get(id=1))
+>>> third_author.books.add(Book.objects.get(id=2))
+>>> third_author.books.add(Book.objects.get(id=3))
+>>> third_author.books.add(Book.objects.get(id=4))
+>>> fourth_author
+<Author: Author object (4)>
+>>> fourth_author.books.add(Book.objects.get(id=1))
+>>> fourth_author.books.add(Book.objects.get(id=2))
+>>> fourth_author.books.add(Book.objects.get(id=3))
+>>> fourth_author.books.add(Book.objects.get(id=4))
+>>> fourth_author.books.add(Book.objects.get(id=5))
+>>> third_book = Book.objects.get(id=3)
+>>> third_book.authors
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager object at 0x00000238BB5A8C40>
+>>> third_book.authors.name
+>>> third_book.authors.all()
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+>>> third_book.authors.remove(second_author)
+>>> third_book.authors.all()
+<QuerySet [<Author: Author object (3)>, <Author: Author object (4)>]>
+>>> second_book = Book.objects.get(id=2)
+>>> second_book.authors.add(Author.object.get(id=5))
+>>> fith_author = Author.objects.get(id=5)
+>>> second_book.authors.add(fith_author)
+>>> second_book.authors.all()
+<QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>]>
+>>> third_author.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+>>> fith_book = Book.objects.get(id=5)
+>>> fith_book.authors.all()
+<QuerySet [<Author: Author object (4)>]>
+>>>
