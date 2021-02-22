@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+</head>
+<body>
+    <div id="wrapper">
+        <header class="page_header">
+            <h1>Authors</h1>
+            <form action="/" class="change_to_books" method="POST">
+                {% csrf_token %}
+                <button type="submit">See Books List</button>
+            </form>
+        </header>
+        <main class="content_section">
+            <div class="form_container main_content_split">
+                <form action="/add_author" class="add_author_form" method="POST">
+                {% csrf_token %}
+                <h2>Add an Author</h2>
+                <div class="name_section">
+                    <label for="first_name_input">First Name:</label>
+                    <input type="text" name="first_name_input" id="author_first_name_input" maxlength="255" required>
+                    <label for="last_name_input">Last Name:</label>
+                    <input type="text" name="last_name_input" id="author_last_name_input" maxlength="255" required>
+                </div>
+                <div class="notes_section">
+                    <label for="notes_input">Notes:</label>
+                    <input type="text" name="notes_input" id="author_notes_text_field" required>
+                </div>
+                <button type="submit" name="add_author_submit_btn">Add</button>
+                </form>
+            </div>
+            <div class="display_container main_content_split">
+                <div class="table_container">
+                    <table class="author_display_table">
+                        <tr class="table_headers">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for author in authors %}
+                        <tr class="author_records">
+                            <td>{{author.id}}</td>
+                            <td>{{author.first_name}} {{author.last_name}}</td>
+                            <td><a href="/authors/{{author.id}}">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

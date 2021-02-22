@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author View</title>
+</head>
+<body>
+    <div id="wrapper">
+        <header class="page_header">
+            <h1>{{author.first_name}} {{author.last_name}}</h1>
+        </header>
+        <main class="main_content">
+            <div class="author_information">
+                <h2>ID: {{author.id}}</h2>
+                <h3>Notes:</h3>
+                <p>{{author.notes}}</p>
+            </div>
+            <div class="bookss_section">
+                <div class="books_header">
+                    <h3>Books:</h3>
+                </div>
+                <div class="book_list">
+                    <ul>
+                    {% for book in author.books.all %}
+                        <li>{{book.title}}</li>
+                    {% endfor %}
+                    </ul>
+                    <form action="/authors/add_book_to_author/{{author.id}}" class="add_book_form" method="POST">
+                        {% csrf_token %}
+                    <select name="book_select">
+                            {% for book in books %}
+                            <option value="{{book.id}}">{{book.title}}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer class="page_footer">
+            <form action="/" class="go_home">
+            <button type="submit">« Home</button>
+            </form>
+            <form action="/authors" class="go_back">
+            <button type="submit">« Back</button>
+            </form>
+        </footer>
+    </div>
+</body>
+</html>

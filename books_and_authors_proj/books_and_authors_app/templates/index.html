@@ -4,9 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books & Authors</title>
+    <title>Books</title>
 </head>
 <body>
-    <h1>Testing</h1>
+    <div id="wrapper">
+        <header class="page_header">
+            <h1>Books</h1>
+            <form action="/authors" class="change_to_authors" method="POST">
+                {% csrf_token %}
+                <button type="submit">See Authors List</button>
+            </form>
+        </header>
+        <main class="content_section">
+            <div class="form_container main_content_split">
+                <form action="/add_book" class="add_book_form" method="POST">
+                {% csrf_token %}
+                <h2>Add a Book</h2>
+                <div class="title_section">
+                    <label for="title_input">Title</label>
+                    <input type="text" name="title_input" id="book_title_input" maxlength="255" required>
+                </div>
+                <div class="desc_section">
+                    <label for="book_desc">Description</label>
+                    <input type="text" name="book_desc" id="book_desc_text_field" required>
+                </div>
+                <button type="submit" name="add_book_submit_btn">Add</button>
+                </form>
+            </div>
+            <div class="display_container main_content_split">
+                <div class="table_container">
+                    <table class="book_display_table">
+                        <tr class="table_headers">
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for book in books %}
+                        <tr class="book_records">
+                            <td>{{book.id}}</td>
+                            <td>{{book.title}}</td>
+                            <td><a href="/books/{{book.id}}">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
