@@ -1,0 +1,111 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    vertical-align: top;
+    /* outline: 1px dotted red; */
+}
+
+#wrapper{
+    width: 1000px;
+    padding: 15px;
+}
+
+.page_header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book_author_switch{
+    align-self: flex-start;
+}
+
+.content_section{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.main_content_split{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+
+.form_container h2{
+    margin: 10px 0px 10px 0px;
+}
+
+.text_inputs_section{
+    margin: 0px 0px 10px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text_inputs{
+    width: 200px;
+    margin: 0px 0px 0px 10px;
+}
+
+.text_area_section{
+    display: flex;
+    margin: 10px 0px 10px 0px;
+}
+
+.text_area_input{
+    width: 200px;
+    height: 50px;
+    resize: none;
+    margin-left: 10px;
+}
+
+.add_book_form button{
+    margin-left: 90px;
+}
+
+.table_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.display_table{
+    border: 1px solid black;
+    border-spacing: 0;
+}
+
+.book_display_table .table_headers{
+    text-align: center;
+}
+
+.display_table .table_headers th{
+    padding: 2px 5px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.data_cell{
+    padding: 2px 5px;
+    margin-left: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.second_col{
+    text-align: left;
+}
+
+.name_section{
+    display: flex;
+    flex-direction: column;
+}
+
+.notes_section{
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_author_form button{
+    margin-left: 90px;
+}
